@@ -26,11 +26,14 @@ app.get('/:short', function (req, res) {
 app.post('/', function (req, res) {
     console.log(req.body)
     const newLink = {
-        shortValue: randomstring.generate(5),
+        shortValue: randomstring.generate({
+            length: 6,
+            charset: 'abc'
+        }),
         longValue: req.body.value,
         public: true
     };
-    
+
     Links.create(newLink)
         .then(data => {
             res.send(data);
