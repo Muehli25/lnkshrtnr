@@ -5,7 +5,19 @@ const app = express();
 
 app.use(express.json()); // parse body
 
-const dbConnection = require("./db.connector");
+var helmet = require('helmet')
+app.use(helmet())
+
+// parse cookies, needed for authentication
+var cookieParser = require('cookie-parser');
+app.use(cookieParser())
+
+// Add cors
+const cors = require('cors');
+app.use(cors());
+
+// database connection
+const dbConnection = require("./db.connector")
 const Links = dbConnection.links;
 
 dbConnection.sequelize.sync();
