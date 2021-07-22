@@ -17,7 +17,7 @@ app.get("/:short", function (req, res) {
                 shortValue: req.params.short
             }
         })
-        .then(value =>
+        .then((value) =>
             res.redirect(301, value.longValue)
         );
 });
@@ -33,7 +33,7 @@ app.post("/", function (req, res) {
     };
 
     Links.create(newLink)
-        .then(data => {
+        .then((data) => {
             res.send(data);
         });
 });
