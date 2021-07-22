@@ -1,7 +1,9 @@
 var express = require('express');
-
+var randomstring = require("randomstring");
 
 var app = express();
+
+app.use(express.json()); // parse body
 
 const dbConnection = require("./db.connector")
 const Links = dbConnection.links;
@@ -9,17 +11,30 @@ const Op = dbConnection.Sequelize.Op;
 
 dbConnection.sequelize.sync();
 
-app.get('/', function (req, res) {
-    dbConnection
-        .authenticate()
-        .then(() => {
-            console.log('Connection has been established successfully.');
+app.get('/:short', function (req, res) {
+    Links
+        .findOne({
+            where: {
+                shortValue: req.params.short
+            }
         })
-        .catch(err => {
-            console.error('Unable to connect to the database:', err);
-        });
-    dbConnection.link.create()
-    res.send('Hello World!');
+        .then(value =>
+            res.redirect(301, value.longValue)
+        );
+});
+
+app.post('/', function (req, res) {
+    console.log(req.body)
+    const newLink = {
+        shortValue: randomstring.generate(5),
+        longValue: req.body.value,
+        public: true
+    };
+    
+    Links.create(newLink)
+        .then(data => {
+            res.send(data);
+        })
 });
 
 app.listen(3000, function () {
