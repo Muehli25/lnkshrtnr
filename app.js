@@ -1,17 +1,16 @@
-var express = require('express');
-var randomstring = require("randomstring");
+const express = require("express");
+const randomstring = require("randomstring");
 
-var app = express();
+const app = express();
 
 app.use(express.json()); // parse body
 
-const dbConnection = require("./db.connector")
+const dbConnection = require("./db.connector");
 const Links = dbConnection.links;
-const Op = dbConnection.Sequelize.Op;
 
 dbConnection.sequelize.sync();
 
-app.get('/:short', function (req, res) {
+app.get("/:short", function (req, res) {
     Links
         .findOne({
             where: {
@@ -23,12 +22,11 @@ app.get('/:short', function (req, res) {
         );
 });
 
-app.post('/', function (req, res) {
-    console.log(req.body)
+app.post("/", function (req, res) {
     const newLink = {
         shortValue: randomstring.generate({
             length: 6,
-            charset: 'abc'
+            charset: "abc"
         }),
         longValue: req.body.value,
         public: true
@@ -37,9 +35,9 @@ app.post('/', function (req, res) {
     Links.create(newLink)
         .then(data => {
             res.send(data);
-        })
+        });
 });
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+    console.log("Listening on port 3000!");
 });

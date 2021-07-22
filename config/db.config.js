@@ -1,7 +1,6 @@
 module.exports = function (){
     switch(process.env.NODE_ENV) {
-        case 'production':
-            console.log("running in production mode");
+        case "production":
             return {
                 HOST: "db",
                 USER: "root",
@@ -14,7 +13,7 @@ module.exports = function (){
                     acquire: 30000,
                     idle: 10000
                 }
-            }
+            };
         default:
             return {
                 HOST: "localhost",
@@ -28,6 +27,6 @@ module.exports = function (){
                     acquire: 30000,
                     idle: 10000
                 }
-            }
+            };
     }
   };
