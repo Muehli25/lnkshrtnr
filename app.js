@@ -17,7 +17,7 @@ const cors = require('cors');
 app.use(cors());
 
 // database connection
-const dbConnection = require('./db.connector');
+const dbConnection = require('./models');
 const Links = dbConnection.links;
 
 dbConnection.sequelize.sync();
@@ -49,6 +49,10 @@ app.post('/', function(req, res) {
         res.send(data);
       });
 });
+
+const authRouter = require('./router/authentication.router');
+
+app.use('/auth', authRouter);
 
 app.listen(3000, function() {
   console.log('Listening on port 3000!');
