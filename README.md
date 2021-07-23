@@ -1,5 +1,9 @@
 # lnkshrtnr
 
+[![ESLint check](https://github.com/Muehli25/lnkshrtnr/actions/workflows/eslint-analysis.yml/badge.svg)](https://github.com/Muehli25/lnkshrtnr/actions/workflows/eslint-analysis.yml)
+[![CodeQL](https://github.com/Muehli25/lnkshrtnr/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Muehli25/lnkshrtnr/actions/workflows/codeql-analysis.yml)
+
+
 This small application is written in javscript and provides a very simple link shortening application.
 
 ## Features
