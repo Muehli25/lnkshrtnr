@@ -11,13 +11,18 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
     "mariadb": "^2.5.4",
     "randomstring": "^1.2.1",
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.12"
   }
 }
