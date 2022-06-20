@@ -15,6 +15,7 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
+      - CREATION_SECRET=password
     ports:
       - 3000:3000
     depends_on:

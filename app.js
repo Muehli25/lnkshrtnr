@@ -27,6 +27,7 @@ app.get('/:short', function(req, res) {
       .findOne({
         where: {
           shortValue: req.params.short,
+          public: true,
         },
       })
       .then((value) =>
@@ -35,19 +36,23 @@ app.get('/:short', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-  const newLink = {
-    shortValue: randomstring.generate({
-      length: 6,
-      charset: 'abc',
-    }),
-    longValue: req.body.value,
-    public: true,
-  };
+  if (req.body.secret === process.env.CREATION_SECRET) {
+    const newLink = {
+      shortValue: randomstring.generate({
+        length: 6,
+        charset: 'alphabetic',
+      }),
+      longValue: req.body.link,
+      public: true,
+    };
 
-  Links.create(newLink)
-      .then((data) => {
-        res.send(data);
-      });
+    Links.create(newLink)
+        .then((data) => {
+          res.send(data);
+        });
+  } else {
+    res.status(403).send();
+  }
 });
 
 app.listen(3000, function() {
